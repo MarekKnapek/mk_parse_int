@@ -1,0 +1,7 @@
+/.vs
+/Debug
+/Release
+/x64
+/mk_parse_int/Debug
+/mk_parse_int/Release
+/mk_parse_int/x64
