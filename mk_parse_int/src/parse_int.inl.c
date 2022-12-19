@@ -161,14 +161,7 @@ mk_extern_c void func_name(char const* const start, char const* const end, int* 
 		#if is_signed == 1
 		if(negative)
 		{
-			if(val <= s_neg_pos_diff)
-			{
-				ret = ((int_type)(-((int_type)(val))));
-			}
-			else
-			{
-				ret = ((int_type)(((int_type)(-((int_type)(((uint_type)(val - s_neg_pos_diff)))))) - ((int_type)(s_neg_pos_diff))));
-			}
+			ret = ((int_type)(((int_type)(-((int_type)(((uint_type)(val - s_neg_pos_diff)))))) - ((int_type)(s_neg_pos_diff))));
 		}
 		else
 		#endif
