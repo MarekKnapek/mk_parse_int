@@ -33,19 +33,19 @@ mkdir "%~dp0corpus\corpus_x64r" 2> nul
 goto again
 :x86d
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
-"%~dp0Debug\mk_parse_int.exe" -max_len=32 -runs=10000000 "%~dp0corpus\corpus_x86d"
+"%~dp0Debug\mk_parse_int.exe" "-max_len=32" "-runs=10000000" "%~dp0corpus\corpus_x86d"
 goto xend
 :x86r
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
-"%~dp0Release\mk_parse_int.exe" -max_len=32 -runs=10000000 "%~dp0corpus\corpus_x86r"
+"%~dp0Release\mk_parse_int.exe" "-max_len=32" "-runs=10000000" "%~dp0corpus\corpus_x86r"
 goto xend
 :x64d
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-"%~dp0x64\Debug\mk_parse_int.exe" -max_len=32 -runs=10000000 "%~dp0corpus\corpus_x64d"
+"%~dp0x64\Debug\mk_parse_int.exe" "-max_len=32" "-runs=10000000" "%~dp0corpus\corpus_x64d"
 goto xend
 :x64r
 call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-"%~dp0x64\Release\mk_parse_int.exe" -max_len=32 -runs=10000000 "%~dp0corpus\corpus_x64r"
+"%~dp0x64\Release\mk_parse_int.exe" "-max_len=32" "-runs=10000000" "%~dp0corpus\corpus_x64r"
 goto xend
 :xcns
 del /q "%~dp0corpus\corpus0\*.*"
