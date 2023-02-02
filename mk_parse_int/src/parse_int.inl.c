@@ -27,6 +27,17 @@
 #ifndef uint_max
 #define uint_max UINT_MAX
 #endif
+#ifndef is_wide
+#define is_wide 0
+#endif
+#if is_wide == 0
+#define char_t char
+#define char_c(x) x
+#elif is_wide == 1
+#include <stddef.h>
+#define char_t wchar_t
+#define char_c(x) L ## x
+#endif
 #ifdef __cplusplus
 #define mk_extern_c extern "C"
 #else
@@ -42,7 +53,7 @@
 #endif
 
 
-mk_extern_c void func_name(char const* const start, char const* const end, int* const err, char const** const nend, int_type* const value)
+mk_extern_c void func_name(char_t const* const start, char_t const* const end, int* const err, char_t const** const nend, int_type* const value)
 {
 	#define bool_t int
 
@@ -52,7 +63,7 @@ mk_extern_c void func_name(char const* const start, char const* const end, int* 
 	#define s_err_invalid ((int)(1))
 	#define s_err_overflow ((int)(2))
 	#if is_signed == 1
-	#define s_minus ((char)('-'))
+	#define s_minus ((char_t)(char_c('-')))
 	#define s_border_pos_val ((uint_type)(((uint_type)(((int_type)(sint_max)))) / ((uint_type)(10))))
 	#define s_border_pos_dig ((uint_type)(((uint_type)(((int_type)(sint_max)))) % ((uint_type)(10))))
 	#define s_border_neg_val ((uint_type)(((uint_type)(((uint_type)(((int_type)(-((int_type)(((int_type)(sint_min)) + ((int_type)(16)))))))) + ((uint_type)(16)))) / ((uint_type)(10))))
@@ -63,15 +74,27 @@ mk_extern_c void func_name(char const* const start, char const* const end, int* 
 	#define s_border_pos_dig ((uint_type)(((uint_type)(uint_max)) % ((uint_type)(10))))
 	#endif
 	
-	static char const s_digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	static char_t const s_digits[] =
+	{
+		char_c('0'),
+		char_c('1'),
+		char_c('2'),
+		char_c('3'),
+		char_c('4'),
+		char_c('5'),
+		char_c('6'),
+		char_c('7'),
+		char_c('8'),
+		char_c('9')
+	};
 
-	char const* it;
+	char_t const* it;
 	#if is_signed == 1
 	bool_t negative;
 	#endif
 	bool_t overflow;
 	uint_type val;
-	char ch;
+	char_t ch;
 	int i;
 	int_type ret;
 
@@ -200,4 +223,7 @@ mk_extern_c void func_name(char const* const start, char const* const end, int* 
 #undef sint_max
 #undef uint_max
 #undef is_signed
+#undef is_wide
+#undef char_t
+#undef char_c
 #undef mk_extern_c
